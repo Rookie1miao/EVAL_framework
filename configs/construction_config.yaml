@@ -1,0 +1,40 @@
+model:
+  model_name: "construction"  
+  class_name: "Unet" 
+  architecture: "Unet" 
+  encoder_name: "resnet50" 
+  encoder_weights: "imagenet"  
+  in_channels: 7
+  classes: 1  
+  activation: "identity"  
+  
+training:
+  epochs: 60
+  learning_rate: 0.0001
+  loss_function: "ExpMSELoss" 
+  optimizer: "Adam"
+  scheduler: "ReduceLROnPlateau"  
+  patience: 5 
+  save_dir: "saved_models/s1"
+  save_ckpt_name: ""
+
+
+dataloader:
+  dataroot: './datasets'   
+  phase: 'train'       
+  isTrain: True          
+  input_nc: 7           
+  output_nc: 1        
+  batchSize: 4       
+  serial_batches: False     
+  nThreads: 2               
+  max_dataset_size: float("inf") 
+  
+augmentation:
+  resize: [512, 512]  
+  horizontal_flip: true
+  vertical_flip: true
+  random_rotate: true
+  brightness: 0.1
+  contrast: 0.1
+  normalize: true

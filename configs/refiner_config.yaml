@@ -1,0 +1,34 @@
+model:
+  model_name: "refine"
+  class_name: "DualFeatureRefiner" 
+
+training:
+  epochs: 10
+  learning_rate: 0.00001
+  loss_function: "L1loss" 
+  optimizer: "Adam"
+  scheduler: "ReduceLROnPlateau"  
+  patience: 5  
+  save_dir: "saved_models/refiner"
+  save_ckpt_name: ""
+
+
+dataloader:
+  dataroot: './datasets'     
+  phase: 'train'     
+  isTrain: True            
+  input_nc: 2              
+  output_nc: 1   
+  batchSize: 2             
+  serial_batches: False    
+  nThreads: 8               
+  max_dataset_size: float("inf") 
+  
+augmentation:
+  resize: [512, 512]  
+  horizontal_flip: true
+  vertical_flip: true
+  random_rotate: true
+  brightness: 0.1
+  contrast: 0.1
+  normalize: true
